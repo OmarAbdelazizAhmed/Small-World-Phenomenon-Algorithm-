@@ -19,15 +19,19 @@ namespace Small_World_Phenomenon___Algorithm__
                 actors = new List<string>();
             }
         }
+         public class queries
+         {
+             public string actor1, actor2;
+         }
         static void Main(string[] args)
         {
-            FileStream F = new FileStream("movies1.txt", FileMode.Open, FileAccess.Read);
-            StreamReader SR = new StreamReader(F);
+            FileStream movies_file = new FileStream("movies1.txt", FileMode.Open, FileAccess.Read);
+            StreamReader movies_SR = new StreamReader(movies_file);
             string line=null;
-            while(SR.Peek() != -1)
+            while(movies_SR.Peek() != -1)
             {
                 movie_data my_movie = new movie_data();
-                line= SR.ReadLine();
+                line= movies_SR.ReadLine();
                 string[] line_splited = line.Split('/');
                 my_movie.movie_name = line_splited[0];
                 foreach (string item in line_splited )
@@ -43,9 +47,20 @@ namespace Small_World_Phenomenon___Algorithm__
                 //uncomment above to test 
                 //your turn xD
             }
-            
-            SR.Close();
-            
+            movies_SR.Close();
+
+            FileStream queries_file = new FileStream("queries1.txt", FileMode.Open, FileAccess.Read);
+            StreamReader queries_SR = new StreamReader(queries_file);
+            string actors=null;
+            while (queries_SR.Peek() != -1)
+            {
+                queries my_querie = new queries();
+                actors = queries_SR.ReadLine();
+                string[] actors_splited = actors.Split('/');
+                my_querie.actor1 = actors_splited[0];
+                my_querie.actor2 = actors_splited[1];
+            }
+            queries_SR.Close();
         }
     }
 }
